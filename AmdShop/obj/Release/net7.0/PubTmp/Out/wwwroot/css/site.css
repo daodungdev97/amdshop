@@ -1,0 +1,110 @@
+﻿html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px; 
+}
+
+.divider-text:before,
+.divider-text:after {
+    color: white;
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid #555;
+    margin: auto 0.25rem;
+    box-shadow: 0 -2px;
+}
+
+.bg-lightblue {
+  background-color:  #a5f3fc;
+}
+
+.hovera {   
+    cursor: pointer;
+}
+
+    .hovera:hover {
+        color: red !important;
+    }
+
+
+
+.hover {
+}
+
+    .hover:hover {
+        color: red !important;
+        background-color: white !important;      
+    }
+
+.imgowl {
+    height: 200px;
+    width: 200px
+}
+
+.selected-button {
+    background-color: white !important;
+    border: solid 2px #e11d48 !important;
+    color: #e11d48 !important;
+} 
+
+
+.navbar-toggler {
+    border: 2px solid white !important;
+}
+
+.navbar-toggler-icon {
+    background-color: white !important;
+}
+
+
+
+.button-container {
+    display: flex;
+}
+
+
+
+.img-product {
+    border-radius: 5px;
+    border: 1px solid #bbb9b9;
+    width: 100%
+}
+
+table {
+    table-layout: fixed;
+    word-wrap: break-word;
+}
+
+.delete-button {
+    width: 100%;
+    font-size: 11px;
+    margin-top: 3px;
+}
+
+.upsert-button {
+    width: 120px;
+}
+
+.iconimg {
+    width: 30px;
+}
+
+
+

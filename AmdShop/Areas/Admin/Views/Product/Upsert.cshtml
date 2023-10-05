@@ -1,0 +1,150 @@
+﻿@model ProductVM
+<div class="row">
+    <div class="card shadow border-0 my-4  col-8 col-md-7 offset-md-1 col-lg-5 offset-lg-2 " style="max-width:70%">
+        <div class="card-header bg-primary bg-gradient ml-0 py-3">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2 class="text-white py-2"> @(Model.Product.Id != Guid.Empty ? "Update" : "Create") Product</h2>
+                </div>
+            </div>
+        </div>
+        <div class="card-body p-4">
+            <form method="post" enctype="multipart/form-data">
+                <input asp-for="Product.Id" hidden />
+                <input asp-for="Product.ProductImages" hidden />
+                <div class="row">
+                    <div class="col-12">
+                        <div class="border p-3 mt-4">
+                            <div class="mb-3 row p-1">
+                                <label asp-for="Product.Title" class="p-0 "></label>
+                                <input asp-for="Product.Title" type="text" class="form-control " />
+                                <span asp-validation-for="Product.Title" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3 row p-1">
+                                <label asp-for="Product.Description" class="p-0 "></label>
+                                <textarea asp-for="Product.Description" type="text" class="form-control "></textarea>                          
+
+                            </div>
+                            <div class="mb-3 row p-1">
+                                <label asp-for="Product.ISBN" class="p-0 "></label>
+                                <input asp-for="Product.ISBN" type="text" class="form-control " />
+                                <span asp-validation-for="Product.ISBN" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3 row p-1">
+                                <label asp-for="Product.AuthorId" class="p-0 "></label>
+                                <select asp-for="@Model.Product.AuthorId" asp-items="@Model.AuthorList" class="form-select ">
+                                    <option disabled selected>--Select Author</option>
+                                </select>
+                                <span asp-validation-for="Product.AuthorId" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3 row p-1">
+                                <label asp-for="Product.Title" class="p-0 "></label>
+                                <input asp-for="Product.Title" type="text" class="form-control " />
+                                <span asp-validation-for="Product.Title" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3 row p-1">
+                                <label asp-for="Product.ListPrice" class="p-0 "></label>
+                                <input asp-for="Product.ListPrice" type="number" class="form-control " />
+                                <span asp-validation-for="Product.ListPrice" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3 row p-1">
+                                <label asp-for="Product.Price" class="p-0 "></label>
+                                <input asp-for="Product.Price" type="text" class="form-control " />
+                                <span asp-validation-for="Product.Price" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3 row p-1">
+                                <label asp-for="Product.Price50" class="p-0 "></label>
+                                <input asp-for="Product.Price50" type="number" class="form-control " />
+                                <span asp-validation-for="Product.Price50" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3 row p-1">
+                                <label asp-for="Product.Price100" class="p-0 "></label>
+                                <input asp-for="Product.Price100" type="number" class="form-control " />
+                                <span asp-validation-for="Product.Price100" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3 row p-1">
+                                <label asp-for="Product.CategoryId" class="p-0 "></label>
+                                <select asp-for="@Model.Product.CategoryId" asp-items="@Model.CategoryList" class="form-select ">
+                                    <option disabled selected>--Select Category</option>
+                                </select>
+                                <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3 row p-1">
+                                <label asp-for="Product.ProductImages" class="p-0 "></label>
+                                <input type="file" name="files" class="form-control " multiple />
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12 col-sm-5  m-2 ">
+                                    @if (Model.Product.Id != Guid.Empty)
+                                    {
+                                        <button type="submit" class="btn btn-primary hover upsert-button  " >
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                            <span class="text">UPDATE   </span>
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <button type="submit" class="btn btn-primary hover  upsert-button ">
+                                            <i class="fa fa-plus-square"></i>
+                                            <span class="text">Create   </span>
+                                        </button>
+                                    }
+
+                                </div>
+                                <div class="col-12 col-sm-5  m-2 ">
+                                    <button asp-controller="Product" asp-action="Index" class="btn btn-secondary border-black border-1 upsert-button  hover" formnovalidate>
+                                        <i class="fas fa-arrow-left"></i>
+                                        <span class="text">Back  </span>
+                                    </button>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+   
+     <div class="col-4 my-4 col-md-4" style="">
+    @if (Model.Product.ProductImages != null)
+        {
+            <span class="text-primary">IMAGE:</span>
+        foreach (var image in Model.Product.ProductImages)
+        {
+            <div class="border p-1 m-2 text-center">
+                <img src="@image.ImageUrl" class="img-product" />
+                <a asp-action="DeleteImage" class="btn btn-danger delete-button" asp-route-imageId="@image.Id">
+                    <i class="bi bi-trash-fill"></i> Delete
+                </a>
+            </div>
+        }
+    }
+     </div>
+</div>
+
+
+@section Scripts{
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'anchor autolink charmap codesample emoticons   lists   table visualblocks ',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough |  addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent ',
+            tinycomments_mode: 'embedded',
+            tinycomments_author: 'Author name',
+            max_height: 300,
+            toolbar: false,
+
+
+        });
+    </script>
+    @{
+        <partial name="_ValidationScriptsPartial"></partial>
+    }
+}

@@ -1,0 +1,86 @@
+﻿@model Category
+<div class="row">
+    <div class="card shadow border-0 my-4 col-10 offset-2  col-md-8 offset-md-2 col-lg-6 offset-lg-3 " style="max-width:70%">
+        <div class="card-header bg-primary bg-gradient ml-0 py-3">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2 class="text-white py-2"> @(Model.Id != 0 && Model.Id !=  null ? "Update" : "Create") Category</h2>
+                </div>
+            </div> 
+        </div>
+        <div class="card-body p-4">
+            <form method="post" enctype="multipart/form-data">
+                <input asp-for="Id" hidden />        
+                <div class="row"> 
+                    <div class="col-12">
+                        <div class="border p-3 mt-4">
+                            <div class="mb-3 row p-1">
+                                <label asp-for="Name" class="p-0 "></label>
+                                <input asp-for="Name" type="text" class="form-control " />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                           
+                            <div class="mb-3 row p-1">
+                                <label asp-for="DisplayOrder" class="p-0 "></label>
+                                <input asp-for="DisplayOrder" type="number" class="form-control " />
+                                <span asp-validation-for="DisplayOrder" class="text-danger"></span>
+                            </div>  
+                                                     
+                            <div class="row">
+                                <div class="col-12  col-sm-5  m-2 ">
+                                    @if (Model.Id != 0 && Model.Id != null)
+                                    {
+                                        <button type="submit" class="btn btn-primary hover  " style="width:120px">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                            <span class="text">Update   </span>
+                                        </button> 
+                                    }
+                                    else  
+                                    {
+                                        <button type="submit" class="btn btn-primary hover  " style="width:120px">
+                                            <i class="fa fa-plus-square"></i>
+                                            <span class="text">Create   </span>
+                                        </button>
+                                    }
+
+                                </div>
+                                <div class="col-12   col-md-3 m-2 ">
+                                    <button asp-controller="Category" asp-action="Index" class="btn btn-secondary border-black border-1   hover" style="width:120px" formnovalidate>
+                                        <i class="fas fa-arrow-left"></i>
+
+                                        <span class="text">Back  </span>
+                                    </button>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+@section Scripts{
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'anchor autolink charmap codesample emoticons   lists   table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough |  addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent ',
+            tinycomments_mode: 'embedded',
+            tinycomments_author: 'Author name',
+            max_height: 300,
+            toolbar: false,
+
+
+        });
+    </script>
+    @{
+        <partial name="_ValidationScriptsPartial"></partial>
+    }
+}

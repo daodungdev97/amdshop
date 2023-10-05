@@ -1,0 +1,122 @@
+﻿.color3 {
+    color: #facc15 !important
+}
+
+.imgdetail {
+    height: 22px;
+    width: 22px;
+}
+
+#detailimgsame {
+    width: 100% !important;
+    height: 50px !important;
+    object-fit: cover;
+}
+
+
+
+.textdetail {
+    font-size: 13px !important;
+}
+
+@media (min-width: 390px) and (max-width: 500px) {
+    #detailimg {
+        width: 95% !important;
+        height: 270px !important;
+        object-fit: cover;
+    }
+}
+
+@media (min-width: 500px) and (max-width: 740px) {
+
+
+    #detailimg {
+        width: 95% !important;
+        height: 350px !important;
+        object-fit: cover;
+    }
+
+    #detailimgsame {
+        width: 100% !important;
+        height: 80px !important;
+        object-fit: cover;
+    }
+}
+
+@media (min-width: 740px) and (max-width: 1150px) {
+    .imgdetail {
+        height: 25px;
+        width: 25px;
+    }
+
+
+
+    .fixed-icons img {
+        width: 42px; /* Đặt chiều rộng của hình ảnh */
+        height: 42px; /* Đặt chiều cao của hình ảnh */
+        margin: 5px;
+        border-radius: 50%; /* Biến hình ảnh thành hình tròn */
+    }
+
+
+    #detailimg {
+        width: 95% !important;
+        height: 420px !important;
+        object-fit: cover;
+    }
+
+    #detailimgsame {
+        width: 100% !important;
+        height: 100px !important;
+        object-fit: cover;
+    }
+}
+
+@media (min-width: 1150px) and (max-width: 1300px) {
+    .imgdetail {
+        height: 28px;
+        width: 28px;
+    }
+
+    .textdetail {
+        font-size: 15px !important;
+    }
+
+    .fixed-icons img {
+        width: 46px; /* Đặt chiều rộng của hình ảnh */
+        height: 46px; /* Đặt chiều cao của hình ảnh */
+        margin: 5px;
+        border-radius: 50%; /* Biến hình ảnh thành hình tròn */
+    }
+
+    #detailimg {
+        width: 85% !important;
+        height: 510px !important;
+        object-fit: cover;
+    }
+
+    #detailimgsame {
+        width: 100% !important;
+        height: 120px !important;
+        object-fit: cover;
+    }
+}
+
+
+@media (min-width: 1300px) {
+    .textdetail {
+        font-size: 15px !important;
+    }
+
+    #detailimg {
+        width: 85% !important;
+        height: 580px !important;
+        object-fit: cover;
+    }
+
+    #detailimgsame {
+        width: 100% !important;
+        height: 150px !important;
+        object-fit: cover;
+    }
+}

@@ -1,0 +1,253 @@
+﻿@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Identity
+@inject IHttpContextAccessor HttpContextAccessor
+@inject UserManager<IdentityUser> UserManager
+
+<!DOCTYPE html>
+@Html.AntiForgeryToken()
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] AMD  Shop</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/ECommerceProject.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="//cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="~/css/responsive.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/detail.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/owlcarousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/lib/owlcarousel/owl.theme.default.min.css">
+
+
+</head>
+
+
+@{
+    var headerItems = new List<dynamic>
+        {
+        new {  Class = "fab fa-facebook-f",Href="https://www.facebook.com" },
+        new {  Class = "fab fa-twitter",Href="" },
+        new {  Class = "fab fa-linkedin-in",Href="https://www.linkedin.com" },
+        new {  Class = "fab fa-instagram",Href="https://www.instagram.com" },
+        new {  Class = "fab fa-youtube",Href="https://www.youtube.com" },
+
+        };
+  
+
+    var customerItems = new List<dynamic>
+        {
+        new { Area = "Customer", Controller = "Home", Action = "Index", DisplayName = "Home",Class="fa-solid fa-house-chimney icons" },
+        new { Area = "Admin", Controller = "Order", Action = "Index", DisplayName = " Order", Class="fa-brands fa-shopify icons" },
+
+        };
+
+    var dropdownItems = new List<dynamic>
+        {
+        new { Area = "Admin", Controller = "Category", Action = "Index", DisplayName = "Category" },
+        new { Area = "Admin", Controller = "Product", Action = "Index", DisplayName = "Product" },
+        new { Area = "Admin", Controller = "Company", Action = "Index", DisplayName = "Company" },
+
+        };
+
+    var footerItems = new List<dynamic>
+        {
+        new {  DisplayName = "Home",Href="" },
+        new {  DisplayName = "Our Shop",Href="" },
+        new {  DisplayName = "Shop Detail",Href=""},
+        new {  DisplayName = "Shopping Cart",Href="" },
+        new {  DisplayName = "Checkout",Href=""},
+        new {  DisplayName = "Contact Us",Href="" },
+
+        };
+
+
+}
+<body>
+    <header>
+
+
+        <div class="row bg-secondary pt-2 px-xl-5 justify-content-between mb-0">
+            <div class="col-4  text-start">
+                <div class="d-inline-flex " >
+                   
+                    @foreach (var item in headerItems)
+                    {
+                        <a class="text-dark px-2 hovera" href="@item.Href">
+                            <i class="@item.Class"></i>
+                        </a>
+                    }
+                </div>
+            </div>
+            <div class="col-8   text-end ">
+                <div class="d-inline-flex  ">                   
+                    <p  class="nav-link text-primary ">Hello @UserManager.GetUserName(User)</p>
+                </div>
+            </div>
+        </div>
+
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-primary border-bottom box-shadow mb-3" data-bs-theme="light">
+            <div class="container-fluid">
+              
+                <div class="ml-2 text-center">
+                    <p class="h2 text-danger border-1 border border-white d-inline  text-center p-2"> AMD </p>
+                    <p class=" h4 text-white d-none d-md-inline">Shop</p>
+                </div>
+               
+               @*  <img src="/images/laptop.png" class="logoimg" /> *@
+
+                <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+
+                <div class="navbar-collapse collapse justify-content-between row">                 
+                    <div class="col-12 col-xxl-6 mt-3">
+                        <ul class="navbar-nav flex-grow-1  justify-content-center  justify-content-xxl-start">
+                            @foreach (var item in customerItems)
+                            {
+                                <li class="nav-item mb-3">
+                                    <a class="nav-link text-white hover d-inline" asp-area="@item.Area" asp-controller="@item.Controller" asp-action="@item.Action">
+                                        <i class="@item.Class">   </i> @item.DisplayName
+                                    </a>
+                                </li>
+                            }
+                            @if (User.IsInRole(SD.Role_Admin))
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle  text-white hover d-inline" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa-solid fa-bars icons"></i> AD Manage
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        @foreach (var item in dropdownItems)
+                                        {
+                                            <li class="nav-item">
+                                                <a class="nav-link text-primary dropdown-item hover" asp-area="@item.Area" asp-controller="@item.Controller" asp-action="@item.Action">@item.DisplayName</a>
+                                            </li>
+                                        }
+
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li class="nav-item">
+                                            <a class="nav-link text-primary dropdown-item hover" asp-area="Identity" asp-page="/Account/Register">Create User</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link text-primary dropdown-item hover" asp-area="Admin" asp-controller="User" asp-action="Index">User List</a>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                            }
+
+                            <li class="nav-item ">
+                                <a class="nav-link d-inline" asp-area="Customer" asp-controller="Cart" asp-action="Index">
+                                    @await Component.InvokeAsync("ShoppingCart")
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-12 col-xxl-6 ">
+
+                        <partial name="_LoginPartial" />
+                    </div>
+
+
+
+                </div>
+            </div>
+        </nav>
+
+    </header>
+    <div class="container-fluid" style="overflow: auto">
+        <partial name="_Nortification" />
+        <main role="main" class="">
+            @RenderBody()
+        </main>
+         
+    </div>
+
+
+
+    <footer class="border-top  bg-primary text-muted text-white">
+
+        <div class="row px-xl-5 pt-5">
+            <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
+                <a href="" class="text-decoration-none">
+                    <h1 class="mb-4 text-white  font-weight-semi-bold"><span class="text-white font-weight-bold border border-white px-3 mr-1">AMD</span><span class="fs-4 ">Computer</span></h1>
+                </a>
+                <p class="text-white">Welcome to E Computer Ryzen </p>
+                <p class="mb-2 text-white"><i class="fa fa-map-marker-alt text-white mr-3"></i>123 Street, New York, USA</p>
+                <p class="mb-2 text-white"><i class="fa fa-envelope text-white mr-3"></i>info@example.com</p>
+                <p class="mb-0 text-white"><i class="fa fa-phone-alt text-white mr-3"></i>+012 345 67890</p>
+            </div>
+
+          
+            <div class="col-lg-8 col-md-12">
+                <div class="row">
+                    <div class="col-md-4 mb-5">
+                        <h5 class="font-weight-bold text-white mb-4">Quick Links</h5>
+                        <div class="d-flex flex-column justify-content-start">
+                            @foreach (var item in footerItems)
+                            {
+                                <a class="text-white mb-2" href="@item.Href"><i class="fa fa-angle-right mr-2"></i>@item.DisplayName</a>
+                            }
+
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-5">
+                        <h5 class="font-weight-bold text-white mb-4">Quick Links</h5>
+                        <div class="d-flex flex-column justify-content-start">
+                            @foreach (var item in footerItems)
+                            {
+                                <a class="text-white mb-2" href="@item.Href"><i class="fa fa-angle-right mr-2"></i>@item.DisplayName</a>
+                            }
+                        </div>
+                    </div>
+                    <div class="col-8 col-md-4 mb-5">
+
+                        @* Subscribe *@
+                        <h5 class="font-weight-bold text-white mb-4">Newsletter</h5>
+                        <form asp-action="SendMail" asp-controller="Cart">
+                            <div class="form-group mb-2">
+                                <input type="text" class="form-control border-0 py-4" placeholder="Your Name" required="required" name="name" />
+                            </div>
+                            <div class="form-group mb-2">
+                                <input type="email" class="form-control border-0 py-4" placeholder="Your Email"   required="required" name="email"/>
+                            </div>
+                            <div>
+                                <button class="btn btn-primary btn-block border-0 py-3" type="submit">Subscribe Now</button>
+                            </div>
+                        </form>
+                        @* Subscribe *@
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class=" border-top border-light mx-xl-5 py-4">
+            <div class=" text-white">
+                Made with <i class="bi bi-heart-fill text-danger"></i> by DUNGDAO
+            </div>
+
+        </div>
+
+
+
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://kit.fontawesome.com/251b297294.js" crossorigin="anonymous"></script>
+    <script src="//cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js" asp-append-version="true"></script>
+    <script src="https://cdn.tiny.cloud/1/eq02szi061hchgqn3ugv2qgtu30lzv0tt7q56313vdkdfgmo/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script>var _token = $('input[name="__RequestVerificationToken"]').val();</script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

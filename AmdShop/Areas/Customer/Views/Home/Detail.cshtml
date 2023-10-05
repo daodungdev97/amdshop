@@ -1,0 +1,306 @@
+﻿@model ShoppingCart
+
+<form method="post" asp-action="Detail" asp-controller="Home" class="mb-3">
+    <input hidden asp-for="ProductId" />
+    <div class="card shadow row border-0 mt-4 mb-4 ">
+        <div class="col-12  ">
+            <div class="card-header bg-primary bg-gradient text-light py-4">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h4 class="text-white text-uppercase">@Model.Product.Title</h4>
+                        <h5 class="text-white-75 fw-semibold mb-0">by @Model.Product.Author.Name</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body ">
+                <div class="py-3">
+                    <div class="row">
+                        <div class="col-6 col-md-3 offset-lg-1 pb-1">
+                            <a asp-action="Index" class="btn btn-outline-primary bg-gradient mb-5 fw-semibold btn-sm text-uppercase">
+                                <p>Back to home</p>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 ">
+                            <div class="row">
+                                <div class="col-12  col-md-6  col-xl-5 offset-sm-1 offset-md-0 offset-xl-1  mb-5">
+                                    @* Carousel*@
+                                    @if (Model.Product.ProductImages != null && Model.Product.ProductImages.Count > 0)
+                                    {
+                                        <div id="carouselExampleIndicators" class="carousel  slide" data-bs-ride="carousel">
+                                            <div class="carousel-indicators row">
+
+                                                @foreach (var imageWithIndex in
+                                               Model.Product.ProductImages
+                                               .Select((image, index) => new { Image = image, Index = index }))
+                                                {
+                                                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="@imageWithIndex.Index"
+                                                            class="@(imageWithIndex.Index==0?"active":"")" aria-current="true" aria-label="Slide 1"></button>
+                                                }
+
+                                            </div>
+                                            <div class="carousel-inner col-8 offset-2">
+                                                @foreach (var imageWithIndex in
+                                               Model.Product.ProductImages
+                                               .Select((image, index) => new { Image = image, Index = index }))
+                                                {
+                                                    <div class="@(imageWithIndex.Index==0?"carousel-item active":"carousel-item")" data-bs-interval="2000">
+                                                        <img src="@imageWithIndex.Image.ImageUrl" class="d-block w-75" alt="...">
+                                                    </div>
+                                                }
+                                            </div>
+                                            <button class="carousel-control-prev " type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                                <span class="carousel-control-prev-icon bg-primary" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Previous</span>
+                                            </button>
+                                            <button class="carousel-control-next " type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                                <span class="carousel-control-next-icon bg-primary" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Next</span>
+                                            </button>
+                                        </div>
+                                    }
+                                </div>
+
+                                <div class="col-12 col-md-6  col-xxl-5">
+                                    <div class="text-center mb-3 ">
+                                        <h5 class=" text-danger">#@Model.Product.Category.Name</h5>
+                                        <h5 class="text-dark  ">ISBN : @Model.Product.ISBN</h5>
+
+                                        <h4 class="text-danger   pb-2">
+                                             
+                                            <span class="text-decoration-line-through">
+                                                @Model.Product.ListPrice.ToString("N0") $
+                                            </span>
+                                        </h4>
+
+                                        <h5 class="text-danger   pb-2">
+                                            Price:
+                                            <span class="">
+                                                @Model.Product.Price.ToString("N0") $
+                                            </span>
+                                        </h5>
+                                    </div>
+
+                                    <div class=" d-flex justify-content-center align-items-center mb-2">
+                                        <div class=" color3 ">
+                                            <i class="fas fa-star fa-lg"></i>
+                                            <i class="fas fa-star fa-lg"></i>
+                                            <i class="fas fa-star fa-lg"></i>
+                                            <i class="fas fa-star fa-lg"></i>
+                                            <i class="fas fa-star fa-lg"></i>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row text-center ps-2 text-detail-home">
+                                        <div class="p-1 col-3  bg-white border-bottom">
+                                            <div class="text-dark  fw-semibold">Quantity</div>
+                                        </div>
+                                        <div class="p-1 col-3  bg-white border-bottom">
+                                            <div class="text-dark  fw-semibold">1-50</div>
+                                        </div>
+                                        <div class="p-1 col-3 bg-white border-bottom">
+                                            <div class="text-dark  fw-semibold">51-100</div>
+                                        </div>
+                                        <div class="p-1 col-3  bg-white border-bottom">
+                                            <div class="text-dark  fw-semibold">100+</div>
+                                        </div>
+                                    </div>
+                                    <div class="row text-center  ps-2 text-detail-home">
+                                        <div class="p-1 col-3 bg-white text-warning fw-bold">
+                                            <div>Price</div>
+                                        </div>
+                                        <div class="p-1 col-3 bg-white text-warning fw-bold">
+                                            <div>@Model.Product.Price.ToString("N0") $</div>
+                                        </div>
+                                        <div class="p-1 col-3  bg-white text-warning fw-bold">
+                                            <div>@Model.Product.Price50.ToString("N0") $</div>
+                                        </div>
+                                        <div class="p-1 col-3  bg-white text-warning fw-bold">
+                                            <div>@Model.Product.Price100.ToString("N0") $</div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row pl-2 my-3 text-detail-home ">
+                                        <p class="text-secondary lh-sm">@Html.Raw(Model.Product.Description)</p>
+                                    </div>
+                                    <div class="row pl-2 mb-3">
+                                        <div class="col-sm-8 col-lg-6 ">
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text bg-primary text-white border-0 fw-semibold "
+                                                      id="inputGroup-sizing-default">
+                                                    Count
+                                                </span>
+                                                <input asp-for="Count" type="number" value="1" class="form-control text-end"
+                                                       aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-8 col-lg-6 ">
+                                            <button  type="submit" class="btn btn-primary bg-gradient  w-100 py-2 text-uppercase fw-semibold ">
+                                             Add to Cart
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    @* Giao hàng*@
+                                    <div class="row text-center mt-4">
+                                        <div class="p-1 col-6 col-sm-5 col-md-6  bg-white border-bottom">
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <img class="imgdetail  " src="~/images/car.png" />
+                                                </div>
+                                                <div class="col-8">
+                                                    <span class=" text-dark  textdetail">Giao hàng toàn quốc</span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="p-1  col-6 col-sm-5  col-md-6  bg-white border-bottom">
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <img class="imgdetail " src="~/images/gift.png" />
+                                                </div>
+                                                <div class="col-8">
+                                                    <span class=" text-dark  textdetail ">Quà tặng kèm</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @* Giao hàng*@
+                                    <div class="row text-center ">
+                                        <div class="p-1  col-6 col-sm-5  col-md-6 bg-white ">
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <img class="imgdetail " src="~/images/ticket.png" />
+                                                </div>
+                                                <div class="col-8">
+                                                    <span class=" text-dark  textdetail">Ưu đãi thanh toán</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="p-1  col-6 col-sm-5  col-md-6  bg-white ">
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <img class="imgdetail " src="~/images/medal.png" />
+                                                </div>
+                                                <div class="col-8">
+                                                    <span class=" text-dark  textdetail">Cam kết chính hãng</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</form>
+
+<div class="row mt-5">
+    <div class="col-12">
+        <div class="row">
+            <div class="col-6 col-md-4 col-xl-3">
+                <h4 class="bg-white text-primary fw-bold text-center"><b></b> Sản phẩm tương tự:</h4>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    @foreach (var product in ViewBag.ProductsInSameCategory)
+    {
+        <div class="col-4">
+            <div class="card ">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">@product.Title</h5>
+                    @if (product.ProductImages != null && product.ProductImages.Count > 0)
+                    {
+                        <img id="detailimgsame" src="@product.ProductImages[0].ImageUrl" class="d-block " alt="...">
+                    }
+                    <h6 class="card-subtitle my-3 text-muted">by <span class="text-danger">@product.Author.Name</span> </h6>
+                    <p class="textdetail text-decoration-line-through mb-0 ">
+                        @product.ListPrice.ToString("N0") &#32;$
+                    </p>
+                    <p class="textdetail mb-0 ">@product.Price.ToString("N0") $</p>
+                    <a href="@Url.Action("Detail", "Home", new { productId = product.Id })" class="btn btn-primary textdetail p-2 ">Chi tiết</a>
+                </div>
+            </div> 
+        </div>
+    }
+</div>
+
+<div class="card bg-white mt-5">
+    <div class="card-header">
+        <h4 class="text-primary"><b>Thông tin chi tiết</b> </h4>
+        <ul class="nav nav-tabs card-header-tabs" data-bs-tabs="tabs">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="true" data-bs-toggle="tab" href="#dhcp">Mô tả sản phẩm</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#static">Đánh giá</a>
+            </li>
+        </ul>
+    </div>
+    <form class="card-body tab-content">
+        <div class="tab-pane active" id="dhcp">
+            <p class="card-text">
+                <h5 class="text-danger"><strong>Amidst the immense mountains and forests of Lam Dong province, Dalat,</strong> </h5>
+                <br>
+                A beautiful town, captivates all those who have been there once.
+                <br>
+                I am one of those. Dalat is often called the City of Eternal Spring.
+                <br>
+                Flowers of all colors, with many species, the most numerous of which are orchids. 
+                <br>
+                Dalat sees flowers vie with one another in blos soming in spring.
+                <br>
+                <br>
+                I used to get up early in the morn- ing on fine days to welcome dawn on the highlands.
+                <br>
+                Opening the windows, I had a breath-taking view of nature,
+                <br>
+                and enjoyed the fragrance of wild flowers car- ried by the clouds,
+                <br>
+                I felt relieved in my heart. In the late afternoons,
+                <br>
+                <br>
+                I often reserved for visits to the Valley of Love and Sigh Lake covered with quiet pine forests.
+                <br>
+                Twilight on Dalat also brought many pictures and sen- sations.
+                <br>
+                The wind rustling through the pine forests, the roar of waterfalls, 
+                <br>
+                the chirping of birds and the clatter of horse ‘s hooves….all of these unforgettable memories always remain with me.
+            </p>
+        </div>
+        <div class="tab-pane" id="static">
+            <p class=" card-text">
+                <div class=" d-flex  mb-2">
+                    <div class=" text-danger ">
+                        <i class="fas fa-star fa-lg"></i>
+                        <i class="fas fa-star fa-lg"></i>
+                        <i class="fas fa-star fa-lg"></i>
+                        <i class="fas fa-star fa-lg"></i>
+                        <i class="fas fa-star fa-lg"></i>
+                    </div>
+                    Very good
+                </div>
+            </p>
+        </div>
+    </form>
+</div>

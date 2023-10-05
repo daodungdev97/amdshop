@@ -1,0 +1,154 @@
+﻿.card-title {
+    height: 48px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.card-small {
+    height: 40px;
+    overflow: hidden;
+    text-align: center;
+}
+
+
+.textinput0 {
+    font-size: 7px !important;
+}
+
+.textinput1 {
+    font-size: 13px !important;
+}
+
+.textheader2 {
+    font-size: 14px !important;
+}
+
+.textheader3 {
+    font-size: 15px !important;
+}
+
+#indeximg {
+    width: 100% !important;
+    height: 280px !important;
+    object-fit: cover;
+}
+.card-img-top{
+    width:75%
+}
+@media (min-width: 390px) and (max-width: 500px) {
+    #indeximg {
+        width: 100% !important;
+        height: 350px !important;
+        object-fit: cover;
+    }
+}
+
+@media (min-width: 500px) and (max-width: 740px) {
+    .textinput0 {
+        font-size: 8px !important
+    }
+
+    .textinput1 {
+        font-size: 14px !important
+    }
+
+    .textheader2 {
+        font-size: 18px !important
+    }
+
+    .textheader3 {
+        font-size: 19px !important;
+    }
+
+    #indeximg {
+        width: 100% !important;
+        height: 400px !important;
+        object-fit: cover;
+    }
+}
+
+@media (min-width: 740px) and (max-width: 1150px) {
+
+    .textinput0 {
+        font-size: 12px !important
+    }
+    .textinput1 {
+        font-size: 15px !important
+    }
+
+    .textheader2 {
+        font-size: 18px !important
+    }
+
+    .textheader3 {
+        font-size: 19px !important;
+    }
+
+    #indeximg {
+        width: 100% !important;
+        height: 500px !important;
+        object-fit: cover;
+    }
+    .card-img-top {
+        width: 55%
+    }
+}
+
+@media (min-width: 1150px) and (max-width: 1350px) {
+
+    .textinput0 {
+        font-size: 14px !important
+    }
+    .textinput1 {
+        font-size: 17px !important
+    }
+
+    .textheader2 {
+        font-size: 20px !important
+    }
+
+
+    .textheader3 {
+        font-size: 21px !important;
+    }
+
+    #indeximg {
+        width: 100% !important;
+        height: 540px !important;
+        object-fit: cover;
+    }
+
+    .card-img-top {
+        width: 50%
+    }
+}
+
+@media (min-width: 1350px)  {
+
+    .textinput0 {
+        font-size: 16px !important
+    }
+    .textinput1 {
+        font-size: 17px !important
+    }
+
+    .textheader2 {
+        font-size: 20px !important
+    }
+
+
+    .textheader3 {
+        font-size: 21px !important;
+    }
+
+    #indeximg {
+        width: 100% !important;
+        height: 650px !important;
+        object-fit: cover;
+    }
+
+    .card-img-top {
+        width: 45%
+    }
+}
+

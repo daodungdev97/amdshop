@@ -1,0 +1,277 @@
+﻿
+
+@media (max-width: 768px) {
+    #tblData, #tblData_length label, #tblData_filter label, .dataTables_paginate, .dataTables_info {
+        font-size: 12px;
+        margin-bottom: 3px;
+    }
+
+    .custom-img {
+        width: 200%
+    }
+
+    .hover {
+        width: 70%
+    }
+
+    .cardcssheader {
+        font-size: 17px !important;
+    }
+
+    .cardcssbodybig {
+        font-size: 13px !important;
+    }
+
+    .cardcssbody {
+        font-size: 12px !important;
+    }
+
+    .headtable {
+        font-size: 14px !important;
+    }
+
+    .icons {
+        margin-right: 3px;
+        margin-left: 3px;
+    }
+
+    .logoimg{
+        width:43px;
+    }
+
+    .logoimg2 {
+        width: 25px;
+    }
+
+    .textindex {
+        font-size: 13px;
+    }
+
+    .buttonsearch {
+        width: 60px !important;
+        height: 35px !important;
+        margin: 4px !important;
+        padding: 2px !important;
+    }
+
+    .searchform {
+        width: 250px !important;
+        height: 35px !important;
+        margin: 4px !important;
+        padding: 2px !important;
+    }
+
+    .hightlight {       
+        border: none;
+        padding: 2px !important;
+        margin: 6px !important;
+        text-decoration: none;
+        text-align: center;
+        width: 60px !important;
+        height: 40px !important;
+        font-size: 12px
+    }
+}
+
+
+@media (min-width: 768px) and (max-width: 1150px) {
+    #tblData, #tblData_length label, #tblData_filter label, .dataTables_paginate, .dataTables_info {
+        font-family: Arial, sans-serif;
+        font-size: 15px;
+        font-family: 'Sniglet', cursive;
+        margin-bottom: 7px;
+    }
+
+    .icons {
+        margin-right: 6px;
+        margin-left: 6px;
+    }
+
+    .custom-img {
+        width: 130%
+    }
+
+    .img-product {
+        width: 70% !important;
+    }
+
+    .hightlight {
+        margin: 20px !important;
+        padding: 6px !important;
+    }
+
+    .cardcssheader {
+        font-size: 22px !important;
+    }
+
+    .cardcssbodybig {
+        font-size: 16px !important;
+    }
+
+    .cardcssbody {
+        font-size: 14px !important;
+    }
+
+    .headtable {
+        font-size: 18px !important;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: center !important;
+        align-items: center;
+    }
+
+    .text-detail-home {
+        font-size: 16px;
+    }
+
+    .delete-button {
+        width: 60%;
+        font-size: 14px;
+        margin-top: 4px;
+    }
+
+    .upsert-button {
+    }
+
+    .iconimg {
+        width: 50px;
+    }
+
+    .logoimg {
+        width: 50px;
+    }
+
+    .logoimg2 {
+        width: 25px;
+    }
+
+    .textindex {
+        font-size: 14px;
+    }
+
+    .buttonsearch {
+        width: 80px !important;
+        height: 40px !important;
+        margin: 8px !important;
+        padding: 4px !important;
+    }
+
+    .searchform {
+        width: 250px !important;
+        height: 40px !important;
+        margin: 8px !important;
+        padding: 4px !important;
+    }
+
+    .hightlight {
+        margin: 10px !important;
+        padding: 6px !important;
+        width: 70px !important;
+        height: 50px !important;
+        font-size: 14px
+    }
+}
+
+
+@media (min-width: 1150px) {
+    #tblData, #tblData_length label, #tblData_filter label, .dataTables_paginate, .dataTables_info {
+        font-family: Arial, sans-serif;
+        font-size: 15px;
+        font-family: 'Sniglet', cursive;
+        margin-bottom: 5px;
+    }
+
+    .delete-button {
+        width: 50%;
+        font-size: 16px;
+        margin-top: 6px;
+    }
+
+    .buttonsearch {
+        width: 80px !important;
+        height: 40px !important;
+        margin: 8px !important;
+        padding: 4px !important;
+    }
+
+    .upsert-button {
+    }
+
+    .icons {
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+
+    .custom-img {
+        width: 130%
+    }
+
+    .img-product {
+        width: 60% !important;
+    }
+
+    .hightlight {
+        margin: 20px !important;
+        padding: 6px !important;
+    }
+
+    .cardcssheader {
+        font-size: 25px !important;
+    }
+
+    .cardcssbodybig {
+        font-size: 17px !important;
+    }
+
+    .cardcssbody {
+        font-size: 15px !important;
+    }
+
+    .headtable {
+        font-size: 18px !important;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: center !important;
+        align-items: center;
+    }
+
+    .text-detail-home {
+        font-size: 16px;
+    }
+
+    .iconimg {
+        width: 50px;
+    }
+
+    .logoimg {
+        width: 57px;
+    }
+
+    .logoimg2 {
+        width: 30px;
+    }
+
+    .textindex {
+        font-size: 16px;
+    }
+
+    .searchform {
+        width: 300px !important;
+        height: 40px !important;
+        margin: 8px !important;
+        padding: 4px !important;
+    }
+
+    .hightlight {
+        margin: 10px !important;
+        padding: 6px !important;
+        width: 80px !important;
+        height: 50px !important;
+        font-size: 15px
+    }
+}
+

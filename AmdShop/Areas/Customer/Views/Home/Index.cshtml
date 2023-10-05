@@ -1,0 +1,414 @@
+﻿@model IEnumerable<Product>
+@{
+    int currentPage = ViewBag.CurrentPage != null ? (int)ViewBag.CurrentPage : 1;
+    //giữ lại page từ sau khi post
+}
+
+@{
+    var featuredItems = new List<dynamic>
+   {
+   new {  DisplayName = "Quality Product",Class="fa fa-check text-info m-0 mr-3" },
+   new {  DisplayName = " Free Shipping", Class="fa fa-shipping-fast text-info m-0 mr-2" },
+  new {  DisplayName = "14-Day Return",Class="fas fa-exchange-alt text-info m-0 mr-3" },
+   new {  DisplayName = " 24/7 Support", Class="fa fa-phone-volume text-info m-0 mr-3" },
+
+   };
+     
+       var collectionItems = new List<dynamic>
+   {
+   new {Name="Spring Collection",  Onclick = "searchByCollection(1)",Src="~/images/product/monitor/hkcant.jpg" },
+ new {Name="Winter Collection",  Onclick = "searchByCollection(2)",Src="~/images/product/vga/570m.jpg" },
+
+   };
+
+}
+
+
+@*carousel*@
+<div class="row">
+    <div class="col-12 col-md-10 offset-md-1 ">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="2000">
+                    <img id="indeximg" class="d-block w-100  " src="~/images/product/bannersale1.jpg" alt="First slide" style="height:20%">
+                </div> 
+                <div class="carousel-item" data-bs-interval="2000">
+                    <img id="indeximg" class="d-block   w-100 " src="~/images/product/bannersale2.jpg" alt="Second slide" style="height:20%">
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <img id="indeximg" class="d-block   w-100  " src="~/images/product/bannersale3.jpg" alt="Third slide" style="height:20%">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</div>
+@*carousel*@
+
+@*featuredItems*@
+
+<div class="row px-xl-3 pb-3 pt-5">
+    @foreach (var item in featuredItems)
+    {
+
+        <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+            <div class="d-flex align-items-center border border-1 border-black mb-4" style="padding: 30px;">
+                <h1 class="@item.Class"></h1>
+                <h5 class="font-weight-semi-bold m-0">@item.DisplayName</h5>
+            </div>
+        </div>
+
+
+    }
+</div>
+@*featuredItems*@
+
+@*owl-carousel*@
+<div class="px-xl-5 owl-carousel  ">
+    <div class="imgowl"><img asp-append-version src="~/images/logo/amd1.jpg" alt="Image 1"></div>
+    <div class="imgowl"><img src="~/images/logo/asus.png" alt="Image 1"></div>
+    <div class="imgowl"><img src="~/images/logo/msi1.jpg" alt="Image 1"></div>
+    <div class="imgowl"><img src="~/images/logo/dareu.jpg" alt="Image 1"></div>
+    <div class="imgowl"><img src="~/images/logo/kingston.jpg" alt="Image 1"></div>
+    <div class="imgowl"><img src="~/images/logo/intel1.jpg" alt="Image 1"></div>
+    <div class="imgowl"><img src="~/images/logo/afox.jpg" alt="Image 1"></div>
+    <div class="imgowl"><img src="~/images/logo/hp.jpg" alt="Image 1"></div>
+</div>
+@*owl-carousel*@
+
+
+@*collection*@
+
+<div class="row px-xl-5 pt-5">
+    @foreach (var item in collectionItems)
+    {
+        <div class="col-md-6 pb-4">
+            <div class="bg-lightblue border-info text-center text-md-right text-white mb-2 py-5 px-5">
+                <div class="row">
+                    <div class="col-6">
+                        <img asp-append-version src="@item.Src" alt="" style="max-width: 75%;">
+                    </div>
+
+                    <div class="col-6" style="z-index: 1;">
+                        <h5 class="text-uppercase text-primary mb-3">20% off the all order</h5>
+                        <h1 class="mb-4 font-weight-semi-bold">@item.Name</h1>
+                        <a onclick="@item.Onclick" class="btn btn-outline-primary py-md-2 px-md-3">Shop Now</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    }
+      
+</div>
+@*collection*@
+
+
+@*search*@
+<div class="row mt-2 px-xl-5">
+    <input class="col-8 col-sm-4 rounded m-1 border-1 searchform textinput1" id="searchField" type="text" name="searchField" placeholder="Nhập tên sản phẩm" />
+    <select class="col-8 col-sm-4 rounded m-1 border-1 searchform" id="categoryId" name="categoryId">
+        <option value=""> <span class="textinput1">--Tất cả--</span></option>
+        @foreach (var category in ViewBag.CategoryList)
+        {
+            <option value="@category.Value"><span class="textinput1">@category.Text</span></option>
+        }
+    </select>
+    <button type="submit" class="btn btn-primary rounded   col-6 col-sm-2  buttonsearch " onclick="search()"><i class="fa-solid fa-magnifying-glass"></i></button>
+</div>
+
+<div class="row">
+    <div class="col-12 d-flex justify-content-center">
+        <div class="row">
+            @foreach (var category in ViewBag.CategoryList)
+            {
+                <button class=" hightlight bg-primary text-white rounded  col-1" value="@category.Value"  onclick="searchByCategory(this, '@category.Value')">
+                    @category.Text
+                </button>
+            }
+        </div>
+    </div>
+</div>
+@*search*@
+
+
+
+@*BODY*@
+<div id="productListContainer">
+    <div class="row pb-3">
+        @foreach (var product in Model)
+        {
+            <div class="col-xl-2 col-lg-3 col-sm-4 col-6">
+                <div class="row p-2">
+                    <div class="col-12 p-1">
+                        <div class="card border-0 p-3 shadow  border-top border-5 rounded">
+
+                            @if (product.ProductImages != null && product.ProductImages.Count() > 0)
+                            {
+                                <img src="@product.ProductImages.FirstOrDefault().ImageUrl" class=" rounded" />
+                            }
+                            else
+                            {
+                                <img src="https://placehold.co/500x600/png" class=" rounded" />
+                            }
+                             
+                            <div class="card-body pb-0">
+                                <div class="pl-1">
+                                    <p class="card-title h5 text-dark text-uppercase text-center">@product.Title</p>
+                                    <p class=" text-danger text-center">by <b>@product.Author.Name</b></p>
+                                </div>
+                                <div class="pl-1">
+                                    <p class="text-dark text-center mb-0 textindex">
+                                        Price:
+                                        <span class="text-decoration-line-through">
+                                            @product.ListPrice.ToString("N0") &#32;$
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="pl-1">
+                                    <p class="text-dark  text-center textindex" >
+                                        <span >
+                                            Sale :
+                                            @product.Price100.ToString("N0") &#32;$
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div>
+                                <a asp-action="Detail"
+                                   asp-route-productId="@product.Id"
+                                   class="btn btn-primary bg-gradient border-0 form-control">
+                                    Details
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        @if (Model.Count() == 0)
+        {
+            <br />
+            <h4>No data available</h4>
+        }
+    </div>
+
+
+    @*có bất kì gì*@
+    @if (Model.Any())
+    {
+        <nav>
+            <ul id="pagination" class="pagination justify-content-center">
+                @if (currentPage > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link " href="#" onclick="loadPage(@currentPage - 1)">&laquo;</a>
+                    </li>
+                }
+
+                @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                {
+                    <li class="page-item @(ViewBag.CurrentPage == i ? "active" : "")">
+                        <a class="page-link " href="#" onclick="loadPage(@i)">@i</a>
+                    </li>
+                }
+
+                @if (currentPage < ViewBag.TotalPages)
+                {
+                    <li class="page-item">
+                        <a class="page-link " href="#" onclick="loadPage(@currentPage + 1)">&raquo;</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    }
+</div>
+
+@*BODY*@
+
+
+<div class="row mt-5">
+    <div class="col-12 mb-3">
+        <div class="row">
+            <div class="col-12 col-md-8 ">
+                <h4 class="bg-white text-primary fw-bold text-center d-inline">
+                    <i class="fas fa-star fa-lg text-warning"></i>
+                    <i class="fas fa-star fa-lg text-warning"></i>
+                    <i class="fas fa-star fa-lg text-warning"></i>
+                    <span>BEST SELLER</span>
+                    <i class="fas fa-star fa-lg text-warning"></i>
+                    <i class="fas fa-star fa-lg text-warning"></i>
+                    <i class="fas fa-star fa-lg text-warning"></i>
+                </h4>
+            </div>
+        </div>
+    </div>
+
+    @foreach (var product in ViewBag.ProductsBestSeller)
+    {
+        <div class="col-4">
+            <div class="card ">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">@product.Title</h5>
+                    @if (product.ProductImages != null && product.ProductImages.Count > 0)
+                    {
+                        <img id="detailimgsame" src="@product.ProductImages[0].ImageUrl" class="d-block " alt="...">
+                    }
+                    <h6 class="card-subtitle my-3 text-muted">by <span class="text-danger">@product.Author.Name</span> </h6>
+                    <p class="textdetail text-decoration-line-through mb-0 ">
+                        @product.ListPrice.ToString("N0") &#32;$
+                    </p>
+                    <p class="textdetail mb-0 ">@product.Price.ToString("N0") $</p>
+                    <a href="@Url.Action("Detail", "Home", new { productId = product.Id })" class="btn btn-primary textdetail p-2 ">Chi tiết</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+@section Scripts{
+    <script>
+
+        $(document).ready(function () {
+            $(".owl-carousel").owlCarousel({
+                items: 4, // Số lượng item hiển thị
+                loop: true, // Lặp lại carousel
+                autoplay: true, // Tự động chạy carousel
+                autoplayTimeout: 2000, // Thời gian chờ giữa các slide (ms)
+                responsive: {
+                    0: {
+                        items: 2 // Số lượng item hiển thị ở màn hình nhỏ hơn 768px
+                    },
+                    768: {
+                        items: 3 // Số lượng item hiển thị ở màn hình từ 768px trở lên
+                    },
+                    992: {
+                        items: 4 // Số lượng item hiển thị ở màn hình từ 992px trở lên
+                    }
+                }
+            });
+        });
+
+       
+        var selectedCategoryId = null;
+        function loadPage(page) {
+            var searchField = document.getElementById('searchField').value;
+            var categoryId = document.getElementById('categoryId').value;
+
+            if (selectedCategoryId) {
+                categoryId = selectedCategoryId;
+            }
+            $.ajax({
+                url: '@Url.Action("Index", "Home")',
+                type: 'POST',
+                data: {
+                    page: page,
+                    searchField: searchField,
+                    searchCategoryId: categoryId
+                },
+                success: function (result) {
+                    $('#productListContainer').replaceWith($(result).find('#productListContainer'));
+                }
+            });
+        }
+
+        function search() {
+            var page = 1;
+            var searchField = document.getElementById('searchField').value;
+            var categoryId = document.getElementById('categoryId').value;
+
+            $.ajax({
+                url: '@Url.Action("Index", "Home")',
+                type: 'POST',
+                data: {
+                    page: page,
+                    searchField: searchField,
+                    searchCategoryId: categoryId
+                },
+                success: function (result) {
+                    $('#productListContainer').replaceWith($(result).find('#productListContainer'));
+
+                }
+            });
+            removeHighlightFromButtons();
+        }
+
+        function searchByCategory(button, categoryId) {
+            var page = 1;
+            var searchField = document.getElementById('searchField').value;
+
+
+            $.ajax({
+                url: '@Url.Action("Index", "Home")',
+                type: 'POST',
+                data: {
+                    page: page,
+                    searchField: searchField,
+                    searchCategoryId: categoryId
+                },
+                success: function (result) {
+                    $('#productListContainer').replaceWith($(result).find('#productListContainer'));
+
+                }
+            });
+
+            highlightSelectedButton(button);
+        }
+
+        function searchByCollection(id) {
+         
+            $.ajax({
+                url: '@Url.Action("SearchByCollection", "Home")',
+                type: 'POST',
+                data: {
+                    idCollection: id,                
+                },
+                success: function (result) {
+                    $('#productListContainer').replaceWith($(result).find('#productListContainer'));
+
+                }
+            });
+            removeHighlightFromButtons();
+        }
+
+        function highlightSelectedButton(button) {
+            var buttons = document.getElementsByClassName('hightlight');
+
+            for (var i = 0; i < buttons.length; i++) {
+
+                buttons[i].classList.remove('selected-button');
+
+            }      
+
+            button.classList.add('selected-button');
+
+
+        }
+
+        function removeHighlightFromButtons() {
+            var buttons = document.getElementsByClassName('hightlight');
+
+            for (var i = 0; i < buttons.length; i++) {
+                var button = buttons[i];
+                button.classList.remove('selected-button');
+            }
+        }
+
+
+        
+    </script>
+    }
+
